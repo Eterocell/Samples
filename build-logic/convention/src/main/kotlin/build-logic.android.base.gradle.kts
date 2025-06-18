@@ -1,4 +1,6 @@
 import com.eterocell.gradle.dsl.configureAndroidCommon
+import com.eterocell.gradle.dsl.libs
+import gradle.kotlin.dsl.accessors._8d2461a2f5612be46a1501c2fc5a80cd.coreLibraryDesugaring
 
 plugins {
     id("com.android.base")
@@ -13,10 +15,16 @@ configureAndroidCommon {
         minSdk = 24
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+        isCoreLibraryDesugaringEnabled = true
     }
 }
+
+dependencies {
+    coreLibraryDesugaring(libs.findLibrary("android-desugar-jdk-libs").get())
+}
+
 
 val Project.androidNamespace
     get() =
