@@ -1,0 +1,22 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "baseBranches": [
+        "main"
+    ],
+    "automerge": true,
+    "automergeType": "pr",
+    "automergeStrategy": "squash",
+    "extends": [
+        "config:recommended"
+    ],
+    "packageRules": [
+        {
+            "groupName": "kotlin with dependency constraints (ksp, compose compiler)",
+            "matchPackageNames": [
+                "/^org.jetbrains.kotlin/",
+                "/^com.google.devtools.ksp/",
+                "/^androidx.compose.compiler/"
+            ]
+        }
+    ]
+}
