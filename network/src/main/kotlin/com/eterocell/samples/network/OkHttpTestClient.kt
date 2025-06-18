@@ -17,27 +17,36 @@ object OkHttpTestClient {
         val url = "https://httpbin.org/post" // 可替换为任意可用 POST 接口
         val jsonMediaType = "application/json; charset=utf-8".toMediaType()
 
-        val jsonBody = """
+        val jsonBody =
+            """
             {
                 "username": "tester",
                 "password": "123456"
             }
-        """.trimIndent()
+            """.trimIndent()
 
-        val request = Request.Builder()
-            .url(url)
-            .addHeader("Authorization", "Bearer demo_token_123")
-            .addHeader("X-Custom-Header", "MyHeaderValue")
-            .post(jsonBody.toRequestBody(jsonMediaType))
-            .build()
+        val request =
+            Request
+                .Builder()
+                .url(url)
+                .addHeader("Authorization", "Bearer demo_token_123")
+                .addHeader("X-Custom-Header", "MyHeaderValue")
+                .post(jsonBody.toRequestBody(jsonMediaType))
+                .build()
 
         client.newCall(request).enqueue(
             object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
+                override fun onFailure(
+                    call: Call,
+                    e: IOException,
+                ) {
                     Log.e("OkHttpTest", "Request failed: ${e.message}")
                 }
 
-                override fun onResponse(call: Call, response: Response) {
+                override fun onResponse(
+                    call: Call,
+                    response: Response,
+                ) {
                     Log.d("OkHttpTest", "Response: ${response.body.string()}")
                 }
             },

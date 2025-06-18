@@ -7,7 +7,6 @@ import org.junit.Test
 import kotlin.test.assertEquals
 
 class CounterViewModelTest {
-
     private lateinit var viewModel: CounterViewModel
 
     @Before

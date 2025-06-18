@@ -1,7 +1,6 @@
 package com.eterocell.samples
 
 import android.app.Application
-import android.os.StrictMode
 
 class SampleApplication : Application() {
     override fun onCreate() {

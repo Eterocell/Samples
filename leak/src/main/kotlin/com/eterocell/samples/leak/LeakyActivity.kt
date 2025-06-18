@@ -24,11 +24,11 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat.startActivity
 
 class LeakyActivity : ComponentActivity() {
-
-    private val handler = Handler(Looper.getMainLooper()) {
-        Toast.makeText(this, "Still here", Toast.LENGTH_SHORT).show()
-        true
-    }
+    private val handler =
+        Handler(Looper.getMainLooper()) {
+            Toast.makeText(this, "Still here", Toast.LENGTH_SHORT).show()
+            true
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

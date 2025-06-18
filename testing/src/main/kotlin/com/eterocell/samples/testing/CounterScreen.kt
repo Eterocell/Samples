@@ -19,7 +19,7 @@ fun CounterScreen() {
         Text("Count: $count", Modifier.testTag("countText"))
         Button(
             onClick = { count++ },
-            modifier = Modifier.testTag("incrementButton")
+            modifier = Modifier.testTag("incrementButton"),
         ) {
             Text("Add")
         }
