@@ -31,6 +31,8 @@ android {
 dependencies {
 
     implementation(projects.permission)
+    implementation(projects.testing)
+    implementation(projects.leak)
 
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlinx.coroutines.android)
@@ -58,4 +60,6 @@ dependencies {
     androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+
+    debugImplementation(libs.leakcanary)
 }

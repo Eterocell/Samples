@@ -22,4 +22,5 @@ include(
     ":app",
     ":permission",
     ":testing",
+    ":leak",
 )
