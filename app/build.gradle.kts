@@ -30,6 +30,8 @@ android {
 
 dependencies {
 
+    implementation(projects.permission)
+
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlinx.coroutines.android)
 

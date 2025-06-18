@@ -1,3 +1,5 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     includeBuild("build-logic")
     repositories {
@@ -16,4 +18,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Samples"
-include(":app")
+include(
+    ":app",
+    ":permission"
+)
