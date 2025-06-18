@@ -23,4 +23,5 @@ include(
     ":permission",
     ":testing",
     ":leak",
+    ":network",
 )

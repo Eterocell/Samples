@@ -33,6 +33,7 @@ dependencies {
     implementation(projects.permission)
     implementation(projects.testing)
     implementation(projects.leak)
+    implementation(projects.network)
 
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlinx.coroutines.android)
