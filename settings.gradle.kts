@@ -21,4 +21,5 @@ rootProject.name = "Samples"
 include(
     ":app",
     ":permission",
+    ":testing",
 )
