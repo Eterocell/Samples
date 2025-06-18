@@ -34,7 +34,6 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.eterocell.samples.permission.LocalNavController
-import java.io.File
 
 @Composable
 fun CameraCaptureScreen() {
@@ -45,20 +44,23 @@ fun CameraCaptureScreen() {
     var imageUriToSave by remember { mutableStateOf<Uri?>(null) }
 
     // SAF 文件创建器
-    val createDocumentLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.CreateDocument("image/jpeg")
-    ) { uri ->
-        if (uri != null) {
-            imageUriToSave = uri
+    val createDocumentLauncher =
+        rememberLauncherForActivityResult(
+            contract = ActivityResultContracts.CreateDocument("image/jpeg"),
+        ) { uri ->
+            if (uri != null) {
+                imageUriToSave = uri
+            }
         }
-    }
 
     // 实际拍照逻辑
     fun takePhotoTo(uri: Uri) {
         val capture = imageCapture ?: return
-        val outputOptions = ImageCapture.OutputFileOptions.Builder(
-            context.contentResolver.openOutputStream(uri)!!
-        ).build()
+        val outputOptions =
+            ImageCapture.OutputFileOptions
+                .Builder(
+                    context.contentResolver.openOutputStream(uri)!!,
+                ).build()
 
         capture.takePicture(
             outputOptions,
@@ -71,20 +73,20 @@ fun CameraCaptureScreen() {
                 override fun onError(exception: ImageCaptureException) {
                     Toast.makeText(context, "保存失败：${exception.message}", Toast.LENGTH_SHORT).show()
                 }
-            }
+            },
         )
     }
 
     // 相机预览与控制
     Box(Modifier.fillMaxSize()) {
         CameraPreview(
-            onImageCaptureCreated = { capture -> imageCapture = capture }
+            onImageCaptureCreated = { capture -> imageCapture = capture },
         )
 
         Column(
             Modifier
                 .align(Alignment.BottomCenter)
-                .padding(16.dp)
+                .padding(16.dp),
         ) {
             Button(onClick = {
                 // 发起 SAF 选择保存位置
@@ -94,7 +96,12 @@ fun CameraCaptureScreen() {
             }
         }
 
-        IconButton(onClick = { navController.popBackStack() }, modifier = Modifier.align(Alignment.TopStart)) {
+        IconButton(
+            onClick = { navController.popBackStack() },
+            modifier =
+                Modifier
+                    .align(Alignment.TopStart),
+        ) {
             Icon(Icons.Filled.ArrowBackIosNew, contentDescription = "返回")
         }
     }
@@ -127,7 +134,7 @@ private fun CameraPreview(onImageCaptureCreated: (ImageCapture) -> Unit) {
             }, ContextCompat.getMainExecutor(context))
             view
         },
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
     )
 
     LaunchedEffect(Unit) {

@@ -25,7 +25,6 @@ dependencies {
     coreLibraryDesugaring(libs.findLibrary("android-desugar-jdk-libs").get())
 }
 
-
 val Project.androidNamespace
     get() =
         path

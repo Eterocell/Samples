@@ -94,6 +94,7 @@ enum class PermissionScreens(
     CameraCapture("CameraCapture", Icons.Filled.Error, false),
 }
 
-val LocalNavController = staticCompositionLocalOf<NavHostController> {
-    error("NavController not provided")
-}
+val LocalNavController =
+    staticCompositionLocalOf<NavHostController> {
+        error("NavController not provided")
+    }

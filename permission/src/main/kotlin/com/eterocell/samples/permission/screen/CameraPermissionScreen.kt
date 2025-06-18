@@ -31,28 +31,31 @@ fun CameraPermissionScreen() {
     val navController = LocalNavController.current
     var dialogMessage by remember { mutableStateOf<String?>(null) }
 
-    val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        arrayOf(
-            Manifest.permission.CAMERA,
-            Manifest.permission.READ_MEDIA_IMAGES
-        )
-    } else {
-        arrayOf(
-            Manifest.permission.CAMERA,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        )
-    }
-
-    val launcher = rememberLauncherForActivityResult(
-        ActivityResultContracts.RequestMultiplePermissions()
-    ) { result ->
-        val allGranted = result.all { it.value }
-        dialogMessage = if (allGranted) {
-            "所有权限已授予"
+    val permissions =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            arrayOf(
+                Manifest.permission.CAMERA,
+                Manifest.permission.READ_MEDIA_IMAGES,
+            )
         } else {
-            "权限被拒绝：" + result.filterValues { !it }.keys.joinToString()
+            arrayOf(
+                Manifest.permission.CAMERA,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+            )
         }
-    }
+
+    val launcher =
+        rememberLauncherForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions(),
+        ) { result ->
+            val allGranted = result.all { it.value }
+            dialogMessage =
+                if (allGranted) {
+                    "所有权限已授予"
+                } else {
+                    "权限被拒绝：" + result.filterValues { !it }.keys.joinToString()
+                }
+        }
 
     Column(Modifier.padding(24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         Text("请求相机与存储权限", style = MaterialTheme.typography.headlineSmall)
@@ -61,13 +64,22 @@ fun CameraPermissionScreen() {
             Text("请求权限")
         }
 
-        Button(onClick = {
-            val granted = permissions.all {
-                ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
-            }
-            if (granted) navController.navigate(PermissionScreens.CameraCapture.route)
-            else dialogMessage = "请先授予所有权限"
-        }) {
+        Button(
+            onClick = {
+                val granted =
+                    permissions.all {
+                        ContextCompat.checkSelfPermission(
+                            context,
+                            it,
+                        ) == PackageManager.PERMISSION_GRANTED
+                    }
+                if (granted) {
+                    navController.navigate(PermissionScreens.CameraCapture.route)
+                } else {
+                    dialogMessage = "请先授予所有权限"
+                }
+            },
+        ) {
             Text("进入拍照页面")
         }
     }
@@ -81,7 +93,7 @@ fun CameraPermissionScreen() {
                 TextButton(onClick = { dialogMessage = null }) {
                     Text("确定")
                 }
-            }
+            },
         )
     }
 }
