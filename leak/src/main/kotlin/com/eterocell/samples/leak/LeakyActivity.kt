@@ -21,7 +21,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat.startActivity
 
 class LeakyActivity : ComponentActivity() {
     private val handler =
@@ -55,10 +54,8 @@ fun JumpToLeakyActivityScreen() {
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = {
-                    startActivity(
-                        currentActivity,
+                    currentActivity.startActivity(
                         Intent(currentActivity, LeakyActivity::class.java),
-                        null,
                     )
                 },
             ) {
